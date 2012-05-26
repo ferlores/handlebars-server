@@ -7,7 +7,7 @@ var net = require('net'),
     conf;
 
 conf = {
-	templates: 'templates',
+	templates: './templates',
 	socket: '/tmp/handlebars.sock'
 };
 
@@ -16,11 +16,18 @@ conf = {
  * Add every template as a partial
  */
 fs.readdirSync(conf.templates).forEach(function(fileName){
-	var file = fs.readFileSync(conf.templates + '/' + fileName, 'ascii'),
-			base = path.basename(fileName, path.extname(fileName));
+	var ext = path.extname(fileName),
+			base = path.basename(fileName, ext),
+			file;
 
-	templates[base] = hb.compile(file);
-	hb.registerPartial(base, file);
+	if (ext === '.js'){
+		require(conf.templates + '/' + fileName)(hb);
+	} else {
+		// Read the file, compile the template and load it as a partial
+		file = fs.readFileSync(conf.templates + '/' + fileName, 'ascii'),
+		templates[base] = hb.compile(file);
+		hb.registerPartial(base, file);
+	}
 });
 
 /**
