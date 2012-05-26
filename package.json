@@ -3,7 +3,8 @@
   "name": "handlebars-server",
   "version": "0.0.1",
   "dependencies": {
-    "handlebars": "*"
+    "handlebars": "*",
+    "connect": "*"
   },
   "devDependencies": {
     "supervisor": "*"
@@ -12,7 +13,7 @@
   "engines": {
     "node": "*"
   },
-  "description": "handlebar templating service using nodejs and sockets",
+  "description": "module for offering handlebar templating service",
   "homepage": "https://github.com/ferlores/handlebars-server",
   "repository": {
     "type": "git",
