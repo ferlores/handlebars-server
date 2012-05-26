@@ -27,7 +27,7 @@ Usage
 supervisor -e html,js app.js
 ```
 
-* In production:
+* Otherwise:
 
 ```
 node app.js
