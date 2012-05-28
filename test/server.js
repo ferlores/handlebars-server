@@ -1,9 +1,8 @@
 var net = require('net'),
-		connect = require('connect'),
-		handlebars = require('../index.js')('./templates'),
+    connect = require('connect'),
+    handlebars = require('../index.js')('./test/templates/'),
     httpServer,
     socketServer;
-
 
 /**
  * Open HTTP and socket server for rendering Handlebars templates
@@ -15,7 +14,7 @@ var net = require('net'),
 // HTTP server
 httpServer = connect()
   .use(connect.bodyParser())
-	.use('/handlebars', handlebars.middleware);
+  .use('/handlebars', handlebars.middleware);
 
 httpServer.listen(3000);
 
@@ -23,16 +22,16 @@ httpServer.listen(3000);
 
 // Socket server
 socketServer = net.createServer(function (client) {
-	client.on('data', function(data) {
-		try {
-			var req = JSON.parse(data.toString());
-			client.write(handlebars(req));
+  client.on('data', function(data) {
+    try {
+      var req = JSON.parse(data.toString());
+      client.write(handlebars(req));
 
-		}catch(e){
-			console.log(e);
-			client.write(e.toString() + '\r\n');
-		}
-	});
+    }catch(e){
+      console.log(e);
+      client.write(e.toString() + '\r\n');
+    }
+  });
 });
 
 socketServer.listen('/tmp/handlebars.sock');

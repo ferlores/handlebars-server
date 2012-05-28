@@ -39,17 +39,40 @@ suite.discuss('When asking for defaut.html')
           '<li>Carl Lerche</li><li>Alan Johnson</li></ul>');
      })
    .undiscuss()
-   .discuss('When asking for partials.html')
+   .discuss('When asking for partial.html')
    .use('localhost', 3000)
    .setHeader('Content-Type', 'application/json')
    .post('/handlebars',{
-        template: 'partials',
+        template: 'partial',
         context: {
           title: 'Hello!'
         }
       })
      .expect(200)
      .expect('should respond with template', function (err, res, body) {
-        assert.equal(body, '<h1>Hello!<h1><p>this is a partial<p>');
+        assert.equal(body, '<h1>Hello!<h1><p>this is a new<p>');
+     })
+   .undiscuss()
+   .discuss('When asking for posts.html')
+   .use('localhost', 3000)
+   .setHeader('Content-Type', 'application/json')
+   .post('/handlebars',{
+        template: 'posts',
+        context: {
+          posts: [
+            {
+              title: 'My First Post',
+              body: 'that is amazing'
+            },
+            {
+              title: 'My Second Post',
+              body: 'o_O'
+            }
+          ]
+        }
+      })
+     .expect(200)
+     .expect('should respond with template', function (err, res, body) {
+        assert.equal(body, '<h1>Posts</h1><h1>My First Post</h1><p>that is amazing</p><h1>My Second Post</h1><p>o_O</p>');
      })
    .export(module);
