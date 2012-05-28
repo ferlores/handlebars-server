@@ -1,23 +1,36 @@
 {
-  "author": "Fernando Lores <ferlores@gmail.com>",
+  
   "name": "handlebars-server",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "description": "handlebar templating service",
+  "main": "index.js",
   "dependencies": {
     "handlebars": "*",
     "connect": "*"
   },
   "devDependencies": {
-    "supervisor": "*"
+    "api-easy": "*"
   },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
   },
-  "description": "module for offering handlebar templating service",
+  "author" : {
+    "name" : "Fernando Lores",
+    "email" : "ferlores@gmail.com"
+  },
+  "keywords" : [
+    "handlebars",
+    "server",
+    "port"
+  ],
   "homepage": "https://github.com/ferlores/handlebars-server",
   "repository": {
     "type": "git",
     "url": "git://github.com/ferlores/handlebars-server.git"
   },
-  "main": "app.js"
+  "scripts": {
+     "test": "vows test/*-test.js --spec"
+  },
+  "license": "MIT"
 }
