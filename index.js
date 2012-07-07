@@ -38,7 +38,7 @@ module.exports = function(dirname) {
   });
 
   // register the helpers - it must be a nodejs module
-  path.existsSync(helpers) && require(helpers)(hb);
+  fs.existsSync(helpers) && require(helpers)(hb);
 
   // excecutes the template
   var app = function(data) {
